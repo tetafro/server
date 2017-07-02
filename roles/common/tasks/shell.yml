@@ -1,0 +1,52 @@
+- name: Check inputrc
+  stat:
+    path: "/home/{{ user }}/.inputrc"
+  register: inputrc
+
+- fail:
+    msg: "File inputrc already exists"
+  when: inputrc.stat.exists
+
+- name: Update inputrc
+  copy:
+    src: files/inputrc
+    dest: "/home/{{ user }}/.inputrc"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+
+- name: Check bash_aliases
+  stat:
+    path: "/home/{{ user }}/.bash_aliases"
+  register: bash_aliases
+
+- fail:
+    msg: "File bash_aliases already exists"
+  when: bash_aliases.stat.exists
+
+- name: Update bash_aliases
+  copy:
+    src: files/bash_aliases
+    dest: "/home/{{ user }}/.bash_aliases"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+
+- name: Set shell prompt
+  replace:
+    dest: "/home/{{ user }}/.bashrc"
+    regexp: '(if \[ "\$color_prompt" = yes \]; then\n)    PS1=.*'
+    replace: '\1    PS1=''\\[\\033[40m\\][\\t]\\[\\033[00m\\] ${debian_chroot:+($debian_chroot)}\\[\\033[01;35m\\]\\u@\\h \\[\\033[01;34m\\]\\w \\$\\[\\033[00m\\] '''
+
+- name: Copy scripts for showing last logins
+  copy:
+    src: files/last_logins.sh
+    dest: "/home/{{ user }}/.last_logins.sh"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0744
+
+- name: Set last_logins script to execute on login
+  lineinfile:
+    path: "/home/{{ user }}/.profile"
+    line: "$HOME/.last_logins.sh"

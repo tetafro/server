@@ -1,0 +1,23 @@
+- name: Update packages
+  apt:
+    update_cache: yes
+
+- name: Generate locales
+  locale_gen:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "en_US.UTF-8"
+    - "ru_RU.UTF-8"
+
+- name: Install basic tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "man"
+    - "less"
+    - "vim"
+
+- name: Remove root password
+  shell: "passwd -d root"

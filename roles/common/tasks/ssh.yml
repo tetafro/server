@@ -1,0 +1,47 @@
+- name: SSH settings
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regexp: "{{ item.before }}"
+    line: "{{ item.after }}"
+  with_items:
+    - { before: "PrintLastLog yes", after: "PrintLastLog no" }
+    - { before: "PermitRootLogin yes", after: "PermitRootLogin no" }
+    - { before: "# Banner /etc/issue", after: "Banner /etc/ssh/banner.txt" }
+
+- name: Make banner for SSH login
+  copy:
+    src: "files/ssh_banner.txt"
+    dest: "/etc/ssh/banner.txt"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Clear MOTD-file
+  file:
+    path: "/etc/motd"
+    owner: root
+    group: root
+    mode: 0644
+    state: "{{ item }}"
+  with_items:
+    - absent
+    - touch
+
+- name: Clear uname-file
+  file:
+    path: "/var/run/motd.dynamic"
+    owner: root
+    group: root
+    mode: 0644
+    state: "{{ item }}"
+  with_items:
+    - absent
+    - touch
+
+- name: Remove uname update files
+  shell: "rm -f /etc/update-motd.d/*"
+
+- name: Reload SSH server
+  service:
+    name: ssh
+    state: reloaded

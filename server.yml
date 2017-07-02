@@ -1,0 +1,11 @@
+- hosts: all
+
+  vars:
+    user: tetafro
+
+  remote_user: "{{ user }}"
+  become: yes
+
+  roles:
+    - common
+    - docker
