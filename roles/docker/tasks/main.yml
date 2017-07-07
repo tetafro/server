@@ -31,3 +31,9 @@
     name: docker-ce
     state: present
     update_cache: yes
+
+- name: Add user {{ user }} to docker group
+  user:
+    name: "{{ user }}"
+    groups: docker
+    append: yes
