@@ -31,6 +31,8 @@
     name: docker-ce
     state: present
     update_cache: yes
+  notify:
+    - restart docker
 
 - name: Add user {{ user }} to docker group
   user:
