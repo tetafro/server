@@ -8,12 +8,11 @@
 
 - name: Install basic tools
   apt:
-    name: "{{ item }}"
     state: present
-  with_items:
-    - man
-    - less
-    - vim
+    name:
+      - man
+      - less
+      - vim
 
 - name: Remove root password
   shell: passwd -d root
