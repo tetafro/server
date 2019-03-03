@@ -1,12 +1,3 @@
-- name: Check inputrc
-  stat:
-    path: /home/{{ user }}/.inputrc
-  register: inputrc
-
-- fail:
-    msg: File inputrc already exists
-  when: inputrc.stat.exists
-
 - name: Update inputrc
   copy:
     src: files/inputrc
@@ -14,15 +5,6 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-
-- name: Check bash_aliases
-  stat:
-    path: /home/{{ user }}/.bash_aliases
-  register: bash_aliases
-
-- fail:
-    msg: File bash_aliases already exists
-  when: bash_aliases.stat.exists
 
 - name: Update bash_aliases
   copy:
