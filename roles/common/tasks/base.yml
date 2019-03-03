@@ -16,3 +16,11 @@
 
 - name: Remove root password
   shell: passwd -d root
+
+- name: Create user
+  user:
+    name: "{{ user }}"
+    groups:
+     - sudo
+    state: present
+    shell: /bin/bash
