@@ -32,12 +32,6 @@
     group: "{{ user }}"
     mode: 0644
 
-- name: Set shell prompt
-  replace:
-    dest: "/home/{{ user }}/.bashrc"
-    regexp: '(if \[ "\$color_prompt" = yes \]; then\n)    PS1=.*'
-    replace: '\1    PS1=''\\[\\033[40m\\][\\t]\\[\\033[00m\\] ${debian_chroot:+($debian_chroot)}\\[\\033[01;35m\\]\\u@\\h \\[\\033[01;34m\\]\\w \\$\\[\\033[00m\\] '''
-
 - name: Copy scripts for showing last logins
   copy:
     src: files/last_logins.sh
