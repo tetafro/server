@@ -1,3 +1,7 @@
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
 - name: Update packages
   apt:
     update_cache: yes
