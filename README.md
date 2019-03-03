@@ -4,20 +4,11 @@ Ansible playbook to make some settings for Linux server. Nothing important here.
 
 Works only with Ubuntu.
 
-# Run
+## Run
 
-1. Install Ansible.
+Install Ansible and copy SSH key to the server.
 
-2. Copy SSH key to the server.
-
-3. Check for Python in `/usr/bin/python`. You can create link if you don't have one
-
-    ```sh
-    sudo ln -s /usr/bin/python3.5 /usr/bin/python
-    ```
-
-4. Run playbook
-
-    ```sh
-    ansible-playbook -K server.yml
-    ```
+Run playbook
+```sh
+ansible-playbook server.yml
+```

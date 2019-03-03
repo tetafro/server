@@ -1,0 +1,7 @@
+- hosts: servers
+  vars:
+    user: worker
+  remote_user: root
+  roles:
+    - common
+    - docker
