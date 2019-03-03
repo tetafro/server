@@ -1,2 +1,2 @@
 # Ansible temporary files
-server.retry
+*.retry
