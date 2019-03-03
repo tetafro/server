@@ -5,7 +5,6 @@
     line: "{{ item.after }}"
   with_items:
     - { before: "PrintLastLog yes", after: "PrintLastLog no" }
-    - { before: "PermitRootLogin yes", after: "PermitRootLogin no" }
     - { before: "# Banner /etc/issue", after: "Banner /etc/ssh/banner.txt" }
 
 - name: Make banner for SSH login
@@ -39,7 +38,9 @@
     - touch
 
 - name: Remove uname update files
-  shell: "rm -f /etc/update-motd.d/*"
+  file:
+    path: "/etc/update-motd.d/*"
+    state: absent
 
 - name: Reload SSH server
   service:
