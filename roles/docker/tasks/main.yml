@@ -7,23 +7,23 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - "apt-transport-https"
-    - "ca-certificates"
-    - "curl"
-    - "software-properties-common"
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
 
 - name: Add Docker’s official GPG key
   apt_key:
-    url: "https://download.docker.com/linux/ubuntu/gpg"
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 - name: Get Ubuntu release
-  shell: "lsb_release -cs"
+  shell: lsb_release -cs
   register: ubuntu_release
 
 - name: Set up Docker stable repository
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release.stdout }} stable"
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_release.stdout }} stable
     state: present
 
 - name: Install Docker CE

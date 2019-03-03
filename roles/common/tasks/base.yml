@@ -11,9 +11,9 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - "man"
-    - "less"
-    - "vim"
+    - man
+    - less
+    - vim
 
 - name: Remove root password
-  shell: "passwd -d root"
+  shell: passwd -d root
