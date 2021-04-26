@@ -1,6 +1,6 @@
 - hosts: servers
   vars:
-    user: worker
+    user: tetafro
   remote_user: root
   roles:
     - common
