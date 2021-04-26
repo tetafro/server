@@ -10,5 +10,5 @@ Install Ansible and copy SSH key to the server.
 
 Run playbook
 ```sh
-ansible-playbook server.yml
+ansible-playbook servers.yml
 ```
