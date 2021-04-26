@@ -21,6 +21,6 @@
   user:
     name: "{{ user }}"
     groups:
-     - sudo
+      - sudo
     state: present
     shell: /bin/bash

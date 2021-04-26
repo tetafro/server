@@ -1,4 +1,5 @@
-- fail:
+- name: Check Linux distro
+  fail:
     msg: OS is not Ubuntu
   when: ansible_distribution != 'Ubuntu'
 
@@ -36,5 +37,5 @@
 - name: Add user {{ user }} to docker group
   user:
     name: "{{ user }}"
-    groups: docker
+    groups: [docker]
     append: yes
