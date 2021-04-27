@@ -1,6 +1,6 @@
 - hosts: servers
   vars:
-    user: tetafro
+    ansible_python_interpreter: /usr/bin/python3
   remote_user: root
   roles:
     - common

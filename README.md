@@ -8,7 +8,12 @@ Works only with Ubuntu.
 
 Install Ansible and copy SSH key to the server.
 
-Run playbook
+Set `USER` and `PASSWORD` variables in `.env` file.
+
+Run the playbook
 ```sh
-ansible-playbook servers.yml
+. .env
+ansible-playbook servers.yml \
+    -e user="$USER" \
+    -e password="$(./passwd.py "$PASSWORD")"
 ```

@@ -1,2 +1,5 @@
 # Ansible temporary files
 *.retry
+
+# Current settings
+.env
